@@ -569,8 +569,14 @@ do
             properties.Visible = true;
         end
 
+        local no_text = {"R", "G", "B"}
+
         for i,v in next, properties do
             proxy[i] = v
+
+            if i == "Position" and typeof(v) == "UDim2" and class == "Text" and not table.find(no_text, properties.Text) then
+                proxy[i] = UDim2.new(v.X.Scale, v.X.Offset, v.Y.Scale, v.Y.Offset + 2)
+            end
         end
 
         drawing:Update()
@@ -4699,5 +4705,7 @@ function library:init()
     self.hasInit = true
 
 end
+
+getgenv().library = library
 
 return library
