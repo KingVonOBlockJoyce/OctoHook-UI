@@ -1961,6 +1961,8 @@ function library:init()
                     self.objects.background.Visible = bool;
                 end)
 
+                inputservice.MouseIconEnabled = not bool
+
                 for _,v in next, objs do
                     if v.Object.Transparency ~= 0 then
                         task.spawn(function()
@@ -4627,12 +4629,6 @@ function library:init()
     
     -- Watermark
     do
-        if not IonHub_User then
-            getgenv().IonHub_User = {
-                UID = 0, 
-                User = "admin"
-            }
-        end
         self.watermark = {
             objects = {};
             text = {
