@@ -2310,6 +2310,7 @@ function library:init()
                             trans = 0;
                             open = false;
                             enabled = true;
+                            backwards = data.backwards or false;
                             objects = {};
                         };
     
@@ -2392,6 +2393,9 @@ function library:init()
                                 self.color = c3;
                                 self.objects.background.Color = c3;
                                 if not nocallback then
+                                    if color.backwards then
+                                        self.trans = 1 - self.trans
+                                    end
                                     self.callback(c3, self.trans);
                                 end
                                 if self.open then
@@ -2407,6 +2411,9 @@ function library:init()
                             if typeof(trans) == 'number' then
                                 self.trans = trans;
                                 if not nocallback then
+                                    if color.backwards then
+                                        trans = 1 - trans
+                                    end
                                     self.callback(self.color, trans);
                                 end
                                 if self.open then
